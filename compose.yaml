@@ -1,0 +1,11 @@
+version: "3.7"
+services:
+  audiobookshelf:
+    image: szzhoubanxian/reseed-puppy:latest
+    network_mode: host # 建议使用host模式，这样访问站点接口不容易出问题，程序的默认端口是1919，如果想使用端口映射就将这一行改为-p 1919:1919
+    volumes:
+      - 你想在主机上保存数据库的目录:/reseed-puppy-php/database #冒号左边请修改为你想在主机上保存数据库的目录
+      - 你在主机上保存种子文件的目录:/tr #种子目录映射，多个目录需要分别映射进来，之后rp工具配置中只需要填写冒号后面的目录
+    environment:
+      - TZ=asia/shanghai #时区设置
+    restart: unless-stopped #若为启动状态重启nas则重新启动
